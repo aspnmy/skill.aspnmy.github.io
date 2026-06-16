@@ -5,205 +5,209 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>本地技能库 - Local Skills</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .skill-link { color: #667eea; text-decoration: none; font-weight: 500; }
+        .skill-link:hover { text-decoration: underline; }
+        .update-log { background: #f8f9fa; padding: 1.5rem; border-radius: 10px; margin-top: 2rem; }
+        .update-log h3 { color: #667eea; margin-bottom: 1rem; }
+        .update-log ul { list-style: none; padding: 0; }
+        .update-log li { padding: 0.3rem 0; color: #666; font-size: 0.9rem; }
+        .update-log li::before { content: '• '; color: #667eea; }
+        .version-tag { display: inline-block; padding: 0.2rem 0.6rem; background: #667eea; color: white; border-radius: 4px; font-size: 0.8rem; margin-right: 0.5rem; }
+        .category-section { margin-bottom: 2rem; }
+        .category-section h3 { color: #667eea; border-left: 4px solid #667eea; padding-left: 0.8rem; margin-bottom: 1rem; font-size: 1.3rem; }
+        .category-section h3 .note { font-size: 0.8rem; color: #999; font-weight: normal; }
+        .category-skills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .skill-chip { display: inline-block; padding: 0.4rem 0.8rem; background: #f0f4ff; border: 1px solid #dce3f8; border-radius: 6px; font-size: 0.85rem; color: #333; }
+        .skill-chip.system-builtin { background: #fef3c7; border-color: #fde68a; }
+        .highlight-card { background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%); border: 1px solid #fde68a; border-radius: 10px; padding: 1rem; }
+        .highlight-card h4 { color: #92400e; margin-bottom: 0.3rem; }
+        .highlight-card p { color: #666; font-size: 0.85rem; }
+        .highlight-card .rating { color: #f59e0b; }
+        .stats-detailed { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1rem 0; }
+        .stat-detailed-card { text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 8px; }
+        .stat-detailed-card .num { font-size: 1.8rem; font-weight: bold; color: #667eea; }
+        .stat-detailed-card .label { font-size: 0.85rem; color: #666; margin-top: 0.3rem; }
+    </style>
 </head>
 <body>
     <header>
         <div class="container">
             <h1>💾 本地技能库</h1>
-            <p class="subtitle">已安装的60个可用技能</p>
+            <p class="subtitle" id="subtitle">加载中...</p>
             <nav>
-                <a href="index.html">官方技能商店</a>
+                <a href="index.html">首页</a>
+                <a href="skills.html">官方技能商店</a>
                 <a href="local-skills.html" class="active">本地技能库</a>
-                <a href="comparison.html">技能对比</a>
                 <a href="https://github.com/anbeime/skill" target="_blank">GitHub</a>
             </nav>
         </div>
     </header>
 
     <main class="container">
-        <section class="stats">
-            <div class="stat-card">
-                <h3>19</h3>
-                <p>独立技能</p>
-            </div>
-            <div class="stat-card">
-                <h3>3</h3>
-                <p>技能集</p>
-            </div>
-            <div class="stat-card">
-                <h3>22</h3>
-                <p>子技能</p>
-            </div>
-            <div class="stat-card">
-                <h3>49.24 MB</h3>
-                <p>总大小</p>
-            </div>
+        <!-- 统计概览 -->
+        <section class="stats" id="stats-section" style="display:none;">
         </section>
 
+        <!-- 分类筛选 -->
         <section class="filters">
-            <h2>🔍 筛选技能</h2>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">全部 (41)</button>
-                <button class="filter-btn" data-filter="independent">独立技能 (19)</button>
-                <button class="filter-btn" data-filter="collection">技能集 (3)</button>
-                <button class="filter-btn" data-filter="needs-api">需要API (10)</button>
-                <button class="filter-btn" data-filter="free">完全免费 (9)</button>
-            </div>
-            <div class="category-filters">
-                <select id="category-select">
-                    <option value="all">所有分类</option>
-                    <option value="内容创作与发布">内容创作与发布</option>
-                    <option value="PPT与演示">PPT与演示</option>
-                    <option value="语音与音频">语音与音频</option>
-                    <option value="数字人与视频配音">数字人与视频配音</option>
-                    <option value="智能体协作">智能体协作</option>
-                    <option value="产品与项目管理">产品与项目管理</option>
-                    <option value="设计与可视化">设计与可视化</option>
-                    <option value="特殊场景">特殊场景</option>
-                    <option value="工具与辅助">工具与辅助</option>
-                    <option value="视频创作">视频创作</option>
-                </select>
+            <h2>🔍 按分类筛选</h2>
+            <div class="filter-buttons" id="category-filters">
             </div>
         </section>
 
-        <section class="skills-list" id="skills-container">
-            <h2>📦 技能列表</h2>
-            <div id="skills-grid" class="skills-grid">
-                <!-- 技能卡片将通过JavaScript动态加载 -->
-                <div class="loading">加载中...</div>
-            </div>
+        <!-- 核心技能推荐 -->
+        <section id="highlights-section" style="display:none;">
+            <h2>⭐ 核心技能推荐</h2>
+            <div class="skills-grid" id="highlights-grid"></div>
+        </section>
+
+        <!-- 按分类展示 -->
+        <section id="categories-section">
+            <h2>📂 技能分类</h2>
+            <div id="categories-container"></div>
+        </section>
+
+        <!-- 更新日志 -->
+        <section id="changelog-section" style="display:none;">
+            <h2>📝 更新日志</h2>
+            <div id="changelog-container"></div>
         </section>
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2026 Skill Store. 本地技能库位置: D:\tool\skills</p>
-            <p>备份位置: D:\tool\skills\skill压缩文件 (73个压缩包, 69.20 MB)</p>
+        <div class="container" id="footer-info">
+            <p>加载中...</p>
         </div>
     </footer>
 
     <script>
-        // 加载本地技能数据
         async function loadSkills() {
             try {
-                const response = await fetch('/data/local_skills.json');
+                const response = await fetch('data/local_skills.json');
                 const data = await response.json();
-                displaySkills(data);
+                renderPage(data);
             } catch (error) {
                 console.error('加载技能数据失败:', error);
-                document.getElementById('skills-grid').innerHTML = '<p class="error">加载失败，请刷新页面重试</p>';
+                document.getElementById('subtitle').textContent = '加载失败';
+                document.querySelector('main').innerHTML = '<section><p class="error">加载失败，请刷新页面重试</p></section>';
             }
         }
 
-        function displaySkills(data) {
-            const container = document.getElementById('skills-grid');
+        function renderPage(data) {
+            const meta = data.metadata;
+            const categories = data.categories;
+            const stats = data.statistics;
+            const highlights = data.highlights;
+            const updateLog = data.update_log;
+
+            // --- 页面副标题 ---
+            document.getElementById('subtitle').textContent =
+                `共 ${meta.total_skills} 个技能（${meta.core_skills} 核心 + ${meta.sub_skills} 子技能 + ${meta.system_builtin} 系统内置）`;
+
+            // --- 统计卡片 ---
+            const statsSection = document.getElementById('stats-section');
+            statsSection.style.display = 'block';
+            statsSection.innerHTML = '<h2>📊 统计概览</h2><div class="stats" style="padding:0;">' +
+                `<div class="stat-card"><h3>${meta.total_skills}</h3><p>技能总数</p></div>` +
+                `<div class="stat-card"><h3>${meta.core_skills}</h3><p>核心技能</p></div>` +
+                `<div class="stat-card"><h3>${meta.sub_skills}</h3><p>子技能</p></div>` +
+                `<div class="stat-card"><h3>${meta.system_builtin}</h3><p>系统内置</p></div>` +
+                '</div>';
+
+            if (stats && stats.by_api_requirement) {
+                statsSection.innerHTML += '<div class="stats-detailed">' +
+                    `<div class="stat-detailed-card"><div class="num">${stats.by_api_requirement['必需API'] || 0}</div><div class="label">必需 API</div></div>` +
+                    `<div class="stat-detailed-card"><div class="num">${stats.by_api_requirement['可选API'] || 0}</div><div class="label">可选 API</div></div>` +
+                    `<div class="stat-detailed-card"><div class="num">${stats.by_api_requirement['完全免费'] || 0}</div><div class="label">完全免费</div></div>` +
+                    '</div>';
+            }
+
+            // --- 分类筛选标签 ---
+            const categoryKeys = Object.keys(categories);
+            const filterContainer = document.getElementById('category-filters');
+            filterContainer.innerHTML = '<button class="filter-btn active" data-cat="all">全部</button>';
+            categoryKeys.forEach(key => {
+                filterContainer.innerHTML += `<button class="filter-btn" data-cat="${key}">${key} (${categories[key].count})</button>`;
+            });
+
+            // 绑定筛选事件
+            filterContainer.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    filterContainer.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const cat = this.dataset.cat;
+                    document.querySelectorAll('.category-section').forEach(section => {
+                        section.style.display = (cat === 'all' || section.dataset.category === cat) ? 'block' : 'none';
+                    });
+                });
+            });
+
+            // --- 核心技能推荐 ---
+            if (highlights && highlights.core_skills && highlights.core_skills.length > 0) {
+                const hsSection = document.getElementById('highlights-section');
+                hsSection.style.display = 'block';
+                const grid = document.getElementById('highlights-grid');
+                grid.innerHTML = '';
+                highlights.core_skills.forEach(s => {
+                    const stars = '⭐'.repeat(s.rating || 5);
+                    grid.innerHTML += `
+                        <div class="skill-card highlight-card">
+                            <div class="skill-header">
+                                <h3>${s.name}</h3>
+                            </div>
+                            <p class="description">${s.description}</p>
+                            <div class="skill-meta">
+                                <span class="rating">${stars}</span>
+                                <span class="skill-tag">${s.category}</span>
+                            </div>
+                        </div>`;
+                });
+            }
+
+            // --- 按分类展示技能 ---
+            const container = document.getElementById('categories-container');
             container.innerHTML = '';
-
-            // 显示独立技能
-            data.independent_skills.forEach(skill => {
-                const card = createSkillCard(skill, 'independent');
-                container.appendChild(card);
+            categoryKeys.forEach(key => {
+                const cat = categories[key];
+                const note = cat.note ? `<span class="note">(${cat.note})</span>` : '';
+                let chips = '';
+                cat.skills.forEach(name => {
+                    const extraClass = (cat.note && cat.note.includes('系统内置')) ? 'system-builtin' : '';
+                    chips += `<span class="skill-chip ${extraClass}">${name}</span>`;
+                });
+                container.innerHTML += `
+                    <div class="category-section" data-category="${key}">
+                        <h3>${key} ${note} <span style="font-weight:normal;font-size:0.85rem;color:#999;">(${cat.count})</span></h3>
+                        <div class="category-skills">${chips}</div>
+                    </div>`;
             });
 
-            // 显示技能集
-            data.skill_collections.forEach(collection => {
-                const card = createSkillCard(collection, 'collection');
-                container.appendChild(card);
-            });
+            // --- 更新日志 ---
+            if (updateLog && updateLog.length > 0) {
+                const clSection = document.getElementById('changelog-section');
+                clSection.style.display = 'block';
+                const clContainer = document.getElementById('changelog-container');
+                clContainer.className = 'update-log';
+                clContainer.innerHTML = '';
+                updateLog.forEach(log => {
+                    const changes = log.changes.map(c => `<li>${c}</li>`).join('');
+                    clContainer.innerHTML += `
+                        <div style="margin-bottom:1rem;">
+                            <span class="version-tag">${log.version}</span>
+                            <strong>${log.date}</strong>
+                            <ul>${changes}</ul>
+                        </div>`;
+                });
+            }
+
+            // --- 页脚 ---
+            document.getElementById('footer-info').innerHTML =
+                `<p>&copy; 2026 Skill Store. 最后更新: ${meta.last_updated}</p>` +
+                `<p>备份位置: ${meta.backup_location} (覆盖率 ${meta.backup_coverage})</p>` +
+                `<p><a href="${meta.repository}" target="_blank">${meta.repository}</a></p>`;
         }
 
-        function createSkillCard(skill, type) {
-            const card = document.createElement('div');
-            card.className = `skill-card ${type}`;
-            card.dataset.category = skill.category;
-            card.dataset.needsApi = skill.needs_api;
-            
-            const apiStatus = skill.needs_api === true ? '需要API' : 
-                            skill.needs_api === 'optional' ? '可选API' : '完全免费';
-            const apiClass = skill.needs_api === true ? 'needs-api' : 
-                           skill.needs_api === 'optional' ? 'optional-api' : 'free';
-
-            const subSkillsInfo = type === 'collection' ? 
-                `<p class="sub-skills">包含 ${skill.sub_skills_count} 个子技能</p>` : '';
-
-            const integratedSkillsInfo = skill.integrated_sub_skills ? 
-                `<p class="integrated-skills">已整合: ${skill.integrated_sub_skills.join(', ')}</p>` : '';
-
-            card.innerHTML = `
-                <div class="skill-header">
-                    <h3>${skill.name}</h3>
-                    <span class="badge ${apiClass}">${apiStatus}</span>
-                </div>
-                <p class="category">${skill.category}</p>
-                <p class="description">${skill.description}</p>
-                ${subSkillsInfo}
-                ${integratedSkillsInfo}
-                <div class="skill-meta">
-                    <span class="size">📦 ${skill.size_mb} MB</span>
-                    <span class="frequency">${'⭐'.repeat(skill.usage_frequency)}</span>
-                    <span class="backup">${skill.has_backup ? '✅ 已备份' : '❌ 无备份'}</span>
-                </div>
-                <div class="skill-api">
-                    <small>API: ${skill.api_type}</small>
-                </div>
-            `;
-
-            return card;
-        }
-
-        // 筛选功能
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                
-                const filter = this.dataset.filter;
-                filterSkills(filter);
-            });
-        });
-
-        document.getElementById('category-select').addEventListener('change', function() {
-            const category = this.value;
-            filterByCategory(category);
-        });
-
-        function filterSkills(filter) {
-            const cards = document.querySelectorAll('.skill-card');
-            cards.forEach(card => {
-                let show = false;
-                switch(filter) {
-                    case 'all':
-                        show = true;
-                        break;
-                    case 'independent':
-                        show = card.classList.contains('independent');
-                        break;
-                    case 'collection':
-                        show = card.classList.contains('collection');
-                        break;
-                    case 'needs-api':
-                        show = card.dataset.needsApi === 'true';
-                        break;
-                    case 'free':
-                        show = card.dataset.needsApi === 'false';
-                        break;
-                }
-                card.style.display = show ? 'block' : 'none';
-            });
-        }
-
-        function filterByCategory(category) {
-            const cards = document.querySelectorAll('.skill-card');
-            cards.forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // 页面加载时执行
         document.addEventListener('DOMContentLoaded', loadSkills);
     </script>
 </body>
