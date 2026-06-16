@@ -4,10 +4,10 @@
 
 收录最全、更新最快的AI Agent技能库，涵盖**文档处理、内容创作、编程开发、机器学习、自动化工作流**等多个领域的精选技能包。
 
-[![官方技能](https://img.shields.io/badge/官方技能-182-blue?style=flat-square)](https://github.com/aspnmy/skill)
-[![本地技能](https://img.shields.io/badge/本地技能-61-green?style=flat-square)](https://github.com/aspnmy/skill)
-[![备份覆盖](https://img.shields.io/badge/备份覆盖-100%25-success?style=flat-square)](https://github.com/aspnmy/skill)
-[![自动更新](https://img.shields.io/badge/更新-每24小时-orange?style=flat-square)](https://github.com/aspnmy/skill)
+[![官方技能](https://img.shields.io/badge/官方技能-182-blue?style=flat-square)](https://github.com/aspnmy/skill.aspnmy.github.io)
+[![本地技能](https://img.shields.io/badge/本地技能-61-green?style=flat-square)](https://github.com/aspnmy/skill.aspnmy.github.io)
+[![备份覆盖](https://img.shields.io/badge/备份覆盖-100%25-success?style=flat-square)](https://github.com/aspnmy/skill.aspnmy.github.io)
+[![自动更新](https://img.shields.io/badge/更新-每24小时-orange?style=flat-square)](https://github.com/aspnmy/skill.aspnmy.github.io)
 
 ## 📊 统计数据
 
@@ -144,7 +144,7 @@
 ### 1. 克隆仓库
 
 ```bash
-git clone https://github.com/aspnmy/skill.git
+git clone https://github.com/aspnmy/skill.aspnmy.github.io.git
 cd skill
 ```
 
@@ -178,7 +178,7 @@ python main.py --once -v
 ```bash
 # 推送后自动触发 GitHub Actions 部署
 git push origin aspnmy
-# 站点地址: https://aspnmy.github.io/skill/
+# 站点地址: https://skill.aspnmy.github.io/
 ```
 
 ### 6. 浏览技能
@@ -279,10 +279,10 @@ ls docs/
 
 ## 🔗 相关链接
 
-- [GitHub仓库](https://github.com/aspnmy/skill)
+- [GitHub仓库](https://github.com/aspnmy/skill.aspnmy.github.io)
 - [Awesome Agent Skills](https://github.com/VoltAgent/awesome-agent-skills)（官方技能源仓库，6.5k+ stars）
 - [在线演示](https://skill.vercel.app)
-- [技能管理数据库](https://github.com/aspnmy/skill/blob/main/docs/技能管理数据库.md)
+- [技能管理数据库](https://github.com/aspnmy/skill.aspnmy.github.io/blob/main/docs/技能管理数据库.md)
 
 ## 🤝 贡献
 
@@ -305,7 +305,7 @@ MIT License
 ## 📝 更新日志
 
 ### v2.1 (2026-06-16)
-- 🔄 切换 remote 到 github.com/aspnmy/skill
+- 🔄 切换 remote 到 github.com/aspnmy/skill.aspnmy.github.io
 - 🌿 创建 aspnmy 分支
 - 🐛 修复 config.py 硬编码路径（改用相对路径）
 - 🌐 修复 local-skills.html GitHub Pages 兼容性（fetch 路径 + 数据格式对齐）

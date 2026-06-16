@@ -2,10 +2,10 @@
 
 收录最全、更新最快的 AI Agent 技能库，涵盖**文档处理、内容创作、编程开发、机器学习、自动化工作流**等多个领域的精选技能包。
 
-[![官方技能](https://img.shields.io/badge/官方技能-182-blue?style=flat-square)](https://github.com/aspnmy/skill)
-[![本地技能](https://img.shields.io/badge/本地技能-61-green?style=flat-square)](https://github.com/aspnmy/skill)
-[![备份覆盖](https://img.shields.io/badge/备份覆盖-100%25-success?style=flat-square)](https://github.com/aspnmy/skill)
-[![自动更新](https://img.shields.io/badge/更新-每24小时-orange?style=flat-square)](https://github.com/aspnmy/skill)
+[![官方技能](https://img.shields.io/badge/官方技能-182-blue?style=flat-square)](https://github.com/aspnmy/skill.aspnmy.github.io)
+[![本地技能](https://img.shields.io/badge/本地技能-61-green?style=flat-square)](https://github.com/aspnmy/skill.aspnmy.github.io)
+[![备份覆盖](https://img.shields.io/badge/备份覆盖-100%25-success?style=flat-square)](https://github.com/aspnmy/skill.aspnmy.github.io)
+[![自动更新](https://img.shields.io/badge/更新-每24小时-orange?style=flat-square)](https://github.com/aspnmy/skill.aspnmy.github.io)
 
 > 英文版: [README.md](README.md)
 
@@ -32,7 +32,7 @@
 ## 🚀 快速开始
 
 ```bash
-git clone https://github.com/aspnmy/skill.git
+git clone https://github.com/aspnmy/skill.aspnmy.github.io.git
 cd skill
 pip install -r requirements.txt
 python main.py --once    # 立即更新
@@ -46,7 +46,7 @@ python main.py --stats   # 数据统计
 ```bash
 git push origin aspnmy
 ```
-站点地址：`https://aspnmy.github.io/skill/`
+站点地址：`https://skill.aspnmy.github.io/`
 
 ## 🏷️ 分支说明
 
@@ -57,7 +57,7 @@ git push origin aspnmy
 
 - 修复 `config.py` 中硬编码的绝对路径，改用相对路径
 - 修复 `local-skills.html` 的 GitHub Pages 兼容性（fetch 相对路径 + 数据格式对齐）
-- 切换 remote 到 `github.com/aspnmy/skill`
+- 切换 remote 到 `github.com/aspnmy/skill.aspnmy.github.io`
 
 ## 📖 文档
 
@@ -67,7 +67,7 @@ git push origin aspnmy
 
 ## 🔗 相关链接
 
-- [GitHub 仓库](https://github.com/aspnmy/skill)
+- [GitHub 仓库](https://github.com/aspnmy/skill.aspnmy.github.io)
 - [在线商店](https://skill.vercel.app)
 - [Awesome Agent Skills](https://github.com/VoltAgent/awesome-agent-skills)
 
