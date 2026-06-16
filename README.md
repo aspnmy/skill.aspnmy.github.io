@@ -173,7 +173,15 @@ python main.py --export skills.csv
 python main.py --once -v
 ```
 
-### 4. 浏览技能
+### 5. 部署到 GitHub Pages
+
+```bash
+# 推送后自动触发 GitHub Actions 部署
+git push origin aspnmy
+# 站点地址: https://aspnmy.github.io/skill/
+```
+
+### 6. 浏览技能
 
 访问 [在线技能商店](https://skill.vercel.app) 或查看本地文件：
 
@@ -300,8 +308,11 @@ MIT License
 - 🔄 切换 remote 到 github.com/aspnmy/skill
 - 🌿 创建 aspnmy 分支
 - 🐛 修复 config.py 硬编码路径（改用相对路径）
-- 🌐 修复 local-skills.html GitHub Pages 兼容性
+- 🌐 修复 local-skills.html GitHub Pages 兼容性（fetch 路径 + 数据格式对齐）
 - 📝 创建 README.zh-CN.md 中文版
+- 🚀 添加 GitHub Pages 部署工作流（`.github/workflows/deploy.yml`）
+- 📄 添加 `.nojekyll` + `404.html`（SPA 路由 fallback）
+- 🔗 修复全部 HTML/JSON 中 `anbeime`→`aspnmy` 链接
 
 ### v2.0 (2026-02-11)
 - ✨ 新增12个本地技能

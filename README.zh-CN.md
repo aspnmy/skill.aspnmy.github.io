@@ -40,6 +40,14 @@ python main.py --daemon  # 守护进程模式
 python main.py --stats   # 数据统计
 ```
 
+### GitHub Pages 部署
+
+推送 `aspnmy` 分支后自动触发部署：
+```bash
+git push origin aspnmy
+```
+站点地址：`https://aspnmy.github.io/skill/`
+
 ## 🏷️ 分支说明
 
 - **main**: 原始分支（fork 自 anbeime/skill）
@@ -70,6 +78,9 @@ python main.py --stats   # 数据统计
 - 🌿 创建 aspnmy 分支
 - 🐛 修复 config.py 硬编码路径
 - 🌐 修复 local-skills.html GitHub Pages 兼容性
+- 🚀 添加 GitHub Pages 部署工作流
+- 📄 添加 `.nojekyll` + `404.html`
+- 🔗 修复全部 HTML/JSON 中 anbeime→aspnmy 链接
 
 ### v2.0 (2026-02-11)
 - ✨ 新增 12 个本地技能（总数 61）
