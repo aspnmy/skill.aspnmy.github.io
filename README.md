@@ -1,11 +1,13 @@
 # 🎯 技能商店 - Skill Store
 
+> 中文版: [README.zh-CN.md](README.zh-CN.md)
+
 收录最全、更新最快的AI Agent技能库，涵盖**文档处理、内容创作、编程开发、机器学习、自动化工作流**等多个领域的精选技能包。
 
-[![官方技能](https://img.shields.io/badge/官方技能-182-blue?style=flat-square)](https://github.com/anbeime/skill)
-[![本地技能](https://img.shields.io/badge/本地技能-61-green?style=flat-square)](https://github.com/anbeime/skill)
-[![备份覆盖](https://img.shields.io/badge/备份覆盖-100%25-success?style=flat-square)](https://github.com/anbeime/skill)
-[![自动更新](https://img.shields.io/badge/更新-每24小时-orange?style=flat-square)](https://github.com/anbeime/skill)
+[![官方技能](https://img.shields.io/badge/官方技能-182-blue?style=flat-square)](https://github.com/aspnmy/skill)
+[![本地技能](https://img.shields.io/badge/本地技能-61-green?style=flat-square)](https://github.com/aspnmy/skill)
+[![备份覆盖](https://img.shields.io/badge/备份覆盖-100%25-success?style=flat-square)](https://github.com/aspnmy/skill)
+[![自动更新](https://img.shields.io/badge/更新-每24小时-orange?style=flat-square)](https://github.com/aspnmy/skill)
 
 ## 📊 统计数据
 
@@ -142,7 +144,7 @@
 ### 1. 克隆仓库
 
 ```bash
-git clone https://github.com/anbeime/skill.git
+git clone https://github.com/aspnmy/skill.git
 cd skill
 ```
 
@@ -269,10 +271,10 @@ ls docs/
 
 ## 🔗 相关链接
 
-- [GitHub仓库](https://github.com/anbeime/skill)
+- [GitHub仓库](https://github.com/aspnmy/skill)
 - [Awesome Agent Skills](https://github.com/VoltAgent/awesome-agent-skills)（官方技能源仓库，6.5k+ stars）
 - [在线演示](https://skill.vercel.app)
-- [技能管理数据库](https://github.com/anbeime/skill/blob/main/docs/技能管理数据库.md)
+- [技能管理数据库](https://github.com/aspnmy/skill/blob/main/docs/技能管理数据库.md)
 
 ## 🤝 贡献
 
@@ -287,7 +289,19 @@ MIT License
 - [VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills) - 官方技能源仓库
 - 所有贡献技能的开发团队和个人
 
+## 🏷️ 分支说明
+
+- **main**: 原始分支（fork 自 anbeime/skill）
+- **aspnmy**: 当前活跃分支，修复 GitHub Pages 兼容性和路径配置问题
+
 ## 📝 更新日志
+
+### v2.1 (2026-06-16)
+- 🔄 切换 remote 到 github.com/aspnmy/skill
+- 🌿 创建 aspnmy 分支
+- 🐛 修复 config.py 硬编码路径（改用相对路径）
+- 🌐 修复 local-skills.html GitHub Pages 兼容性
+- 📝 创建 README.zh-CN.md 中文版
 
 ### v2.0 (2026-02-11)
 - ✨ 新增12个本地技能
@@ -307,9 +321,9 @@ MIT License
 
 ---
 
-**最后更新**: 2026-02-11  
-**维护者**: anbeime  
-**联系方式**: GitHub Issues
+**最后更新**: 2026-06-16
+**维护者**: aspnmy
+**分支**: aspnmy
 
 <!-- AUTO-SYNC-SKILLS-START -->
 
