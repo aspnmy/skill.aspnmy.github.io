@@ -3,7 +3,10 @@
 技能商店自动更新配置文件
 """
 
-import os
+from pathlib import Path
+
+# 项目根目录（基于本文件位置自动解析，保证在任何机器上可运行）
+BASE_DIR = Path(__file__).resolve().parent
 
 # GitHub 仓库配置
 GITHUB_REPO_URL = "https://github.com/VoltAgent/awesome-agent-skills"
@@ -12,17 +15,14 @@ GITHUB_RAW_README_URL = "https://raw.githubusercontent.com/VoltAgent/awesome-age
 # 更新频率配置（秒）
 UPDATE_INTERVAL = 3600 * 24  # 每24小时更新一次
 
-# 基础路径：以 config.py 所在目录为根
-_BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-# 数据存储路径
-DATA_DIR = os.path.join(_BASE_DIR, "data")
-SKILLS_JSON_PATH = os.path.join(DATA_DIR, "skills.json")
-LAST_UPDATE_PATH = os.path.join(DATA_DIR, "last_update.txt")
+# 数据存储路径（相对项目根目录）
+DATA_DIR = str(BASE_DIR / "data")
+SKILLS_JSON_PATH = str(BASE_DIR / "data" / "skills.json")
+LAST_UPDATE_PATH = str(BASE_DIR / "data" / "last_update.txt")
 
 # 日志配置
-LOG_DIR = os.path.join(_BASE_DIR, "logs")
-LOG_FILE = os.path.join(LOG_DIR, "updater.log")
+LOG_DIR = str(BASE_DIR / "logs")
+LOG_FILE = str(BASE_DIR / "logs" / "updater.log")
 
 # 技能商店 API 配置（根据实际情况修改）
 SKILL_STORE_API_URL = "http://localhost:8000/api/skills"
